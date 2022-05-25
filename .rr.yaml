@@ -1,0 +1,58 @@
+version: "2.7"
+
+server:
+  #command: "php public/index.php"
+  # If you are not using symfony 5.3+ and the new Runtime component:
+  # remove the previous `command` line above and uncomment the line below to use the deprecated command.
+  command: "php /var/www/html/bin/console baldinof:roadrunner:worker"
+  env:
+    - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
+
+http:
+  address: 0.0.0.0:80
+  middleware: [ "headers", "static", "gzip" ]
+  uploads:
+    forbid: [ ".php", ".exe", ".bat" ]
+  static:
+    dir: "/var/www/html/public"
+    forbid: [ ".php", ".htaccess" ]
+  access_logs: true
+  trusted_subnets:
+    [
+        "10.0.0.0/8",
+        "127.0.0.0/8",
+        "172.16.0.0/12",
+        "192.168.0.0/16",
+        "::1/128",
+        "fc00::/7",
+        "fe80::/10",
+        "10.132.0.0/20",
+        "10.112.0.0/14",
+        "35.186.231.249/32",
+        "130.211.15.20/32",
+        "35.186.253.21/32"
+    ]
+
+logs:
+  output: stdout
+  mode: production
+  channels:
+    http:
+      level: debug # Log all http requests, set to info to disable
+    server:
+      level: info # Everything written to worker stderr is logged
+      mode: raw
+    metrics:
+      level: error
+
+status:
+  address: 0.0.0.0:2114
+
+# Uncomment to use metrics integration
+# rpc:
+#   listen: tcp://127.0.0.1:6001
+
+# Uncomment to use metrics integration
+# metrics:
+#   # prometheus client address (path /metrics added automatically)
+#   address: "0.0.0.0:9180"
