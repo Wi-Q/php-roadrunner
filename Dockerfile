@@ -30,7 +30,7 @@ WORKDIR /var/www/html
 # Copy Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN composer global config github-oauth.github.com f1c802f819b4eaa7a49a69f97275fbc8a9f14245
+RUN composer global config github-oauth.github.com replaceme
 
 # Copy RoadRunner
 COPY --from=rr /usr/bin/rr /usr/bin/rr

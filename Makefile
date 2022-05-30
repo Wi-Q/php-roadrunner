@@ -1,7 +1,7 @@
 NS = eu.gcr.io/wi-q-145611
 REPO = php-roadrunner
 PHP_VERSION ?= 8.1-alpine
-ROADRUNNER_VERSION ?= 2.9.4
+ROADRUNNER_VERSION ?= 2.10.2
 VERSION = 8.1
 
 .PHONY: build

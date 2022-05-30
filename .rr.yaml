@@ -1,4 +1,4 @@
-version: "2.7"
+version: "2.10.2"
 
 server:
   #command: "php public/index.php"
@@ -10,7 +10,7 @@ server:
 
 http:
   address: 0.0.0.0:80
-  middleware: [ "headers", "static", "gzip" ]
+  middleware: [ "headers", "static", "gzip", "new_relic" ]
   uploads:
     forbid: [ ".php", ".exe", ".bat" ]
   static:
@@ -32,6 +32,9 @@ http:
         "130.211.15.20/32",
         "35.186.253.21/32"
     ]
+  new_relic:
+    app_name: "NEW_RELIC_APP_NAME"
+    license_key: "NEW_RELIC_KEY"
 
 logs:
   output: stdout
@@ -42,6 +45,8 @@ logs:
     server:
       level: info # Everything written to worker stderr is logged
       mode: raw
+      output: stdout
+      err_output: stderr
     metrics:
       level: error
 

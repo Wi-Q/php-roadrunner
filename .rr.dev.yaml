@@ -1,4 +1,4 @@
-version: "2.7"
+version: "2.10.2"
 
 server:
   #command: "php public/index.php"
